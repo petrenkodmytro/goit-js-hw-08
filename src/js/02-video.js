@@ -7,7 +7,7 @@ const player = new Player(iframe);
 const STORAGE_KEY = 'videoplayer-current-time';
 
 // Відновлення відтворення зі збереженої позиції під час перезавантаження сторінки. Якщо пустий localStorage - getItem повертає null. Засетиться 0.
-const saveTime = localStorage.getItem(STORAGE_KEY) || 0;
+const saveTime = Number(localStorage.getItem(STORAGE_KEY) || 0);
 player.setCurrentTime(saveTime);
 
 // Відстежування події timeupdate - оновлення часу відтворення
