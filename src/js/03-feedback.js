@@ -7,18 +7,18 @@ formRef.addEventListener('submit', onFormSubmit);
 formRef.addEventListener('input', throttle(onFormInput, 500));
 
 const FormData = {};
-//деструктуризація змінних email та password з об'єкта form.elements
+// деструктуризація змінних email та password з об'єкта form.elements
 const { email, message } = formRef.elements;
-// Під час завантаження сторінки перевіряй стан сховища
+// під час завантаження сторінки перевіряй стан сховища
 lastSaveForm();
 
 function onFormSubmit(event) {
   event.preventDefault();
   // проверка на пустые поля
   if (email.value.trim() === '' || message.value.trim() === '') {
-    alert('Всі поля повинні бути заповнені');
+    return alert('Всі поля повинні бути заповнені');
   }
-  //  виводимо у консоль об'єкт з полями email та message
+  // виводимо у консоль об'єкт з полями email та message
   console.log(FormData);
   // очищаем поля формы
   event.currentTarget.reset();
@@ -29,7 +29,6 @@ function onFormSubmit(event) {
 function onFormInput(event) {
   FormData[email.name] = email.value;
   FormData[message.name] = message.value;
-
   // або
   // FormData[event.target.name] = event.target.value;
 
