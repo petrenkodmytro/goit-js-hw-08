@@ -19,7 +19,7 @@ function onFormSubmit(event) {
     return alert('Всі поля повинні бути заповнені');
   }
   // виводимо у консоль об'єкт з полями email та message
-  console.log(FormData);
+  console.log(JSON.parse(localStorage.getItem(STORAGE_KEY)));
   // очищаем поля формы
   event.currentTarget.reset();
   // очищаем localStorage
@@ -31,7 +31,7 @@ function onFormInput(event) {
   FormData[message.name] = message.value;
   // або
   // FormData[event.target.name] = event.target.value;
-
+ 
   // записуємо у локальне сховище об'єкт з полями email і message
   localStorage.setItem(STORAGE_KEY, JSON.stringify(FormData));
 }
@@ -52,3 +52,44 @@ function lastSaveForm() {
 // Під час завантаження сторінки перевіряй стан сховища, і якщо там є збережені дані, заповнюй ними поля форми. В іншому випадку поля повинні бути порожніми.
 // Під час сабміту форми очищуй сховище і поля форми, а також виводь у консоль об'єкт з полями email, message та їхніми поточними значеннями.
 // Зроби так, щоб сховище оновлювалось не частіше, ніж раз на 500 мілісекунд. Для цього додай до проекту і використовуй бібліотеку lodash.throttle.
+
+/** 
+const KEY = 'selectedFilter';
+const filterForm = document.querySelector('filter-form');
+const selectedFilter = {};
+initialForm();
+
+filterForm.addEventListener('submit', onFormSubmit);
+filterForm.addEventListener('change', onFormChange);
+filterForm.addEventListener('reset', () => {
+  localStorage.removeItem(KEY);
+});
+
+function onFormSubmit(e) {
+  e.preventDefault()
+  const FormData = new FormData(filterForm)
+  FormData.forEach((value, name)=> console.log(value, name))
+}
+
+function onFormChange(e) {
+  //---1---
+  selectedFilter[e.target.name] = e.target.value;
+  localStorage.setItem(KEY, JSON.stringify(selectedFilter));
+  //---2---
+  // let savedFilter = localStorage.getItem(KEY);
+  // savedFilter = savedFilter ? JSON.parse(savedFilter) : {};
+  // savedFilter[e.target.name] = e.target.value;
+  // localStorage.setItem(KEY, JSON.stringify(selectedFilter));
+}
+
+function initialForm() {
+  let savedFilter = localStorage.getItem(KEY);
+  if (savedFilter) {
+    savedFilter = JSON.parse(savedFilter);
+    Object.entries(savedFilter).forEach(([name, value]) => {
+      selectedFilter[name] = value;
+      filterForm.elements[name] = value;
+    });
+  }
+}
+*/
