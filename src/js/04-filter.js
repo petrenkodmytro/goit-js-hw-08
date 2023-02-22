@@ -1,7 +1,7 @@
 const STORAGE_KEY = 'selectedFilter';
 const filterForm = document.querySelector('.filter-form');
-const selectedFilter = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-console.log(selectedFilter);
+// const selectedFilter = {};
+// console.log(selectedFilter);
 initialForm();
 
 filterForm.addEventListener('submit', onFormSubmit);
@@ -19,13 +19,13 @@ function onFormSubmit(e) {
 
 function onFormChange(e) {
   //---1---
-  selectedFilter[e.target.name] = e.target.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedFilter));
+  // selectedFilter[e.target.name] = e.target.value;
+  // localStorage.setItem(STORAGE_KEY, JSON.stringify(selectedFilter));
   //---2---
-  // let savedFilter = localStorage.getItem(STORAGE_KEY);
-  // savedFilter = savedFilter ? JSON.parse(savedFilter) : {};
-  // savedFilter[e.target.name] = e.target.value;
-  // localStorage.setItem(STORAGE_KEY, JSON.stringify(savedFilter));
+  let savedFilter = localStorage.getItem(STORAGE_KEY);
+  savedFilter = savedFilter ? JSON.parse(savedFilter) : {};
+  savedFilter[e.target.name] = e.target.value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(savedFilter));
 }
 
 function initialForm() {
@@ -33,7 +33,7 @@ function initialForm() {
   if (savedFilter) {
     savedFilter = JSON.parse(savedFilter);
     Object.entries(savedFilter).forEach(([name, value]) => {
-      // console.log(selectedFilter[name]);
+      // selectedFilter[name] = value;
       filterForm.elements[name].value = value;
     });
   }
