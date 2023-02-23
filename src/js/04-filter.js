@@ -32,9 +32,14 @@ function initialForm() {
   let savedFilter = localStorage.getItem(STORAGE_KEY);
   if (savedFilter) {
     savedFilter = JSON.parse(savedFilter);
+    console.log(savedFilter);
     Object.entries(savedFilter).forEach(([name, value]) => {
       // selectedFilter[name] = value;
       filterForm.elements[name].value = value;
     });
   }
+  // else
+  // const startFilter ={
+  // }
+  console.log(filterForm.elements.color.value);
 }
