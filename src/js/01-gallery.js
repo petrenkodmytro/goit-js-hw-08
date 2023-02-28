@@ -1,9 +1,11 @@
 import { galleryItems } from './gallery-items.js';
 // Описаний в документації
-import SimpleLightbox from "simplelightbox";
+import SimpleLightbox from 'simplelightbox';
 // Додатковий імпорт стилів
-import "simplelightbox/dist/simple-lightbox.min.css";
+import 'simplelightbox/dist/simple-lightbox.min.css';
 // Change code below this line
+import cloneDeep from 'lodash.clonedeep';
+// const cloneDeep = require('lodash.clonedeep');
 
 console.log(galleryItems);
 
@@ -32,3 +34,20 @@ new SimpleLightbox('.gallery a', {
   captionPosition: 'bottom',
   captionDelay: 250,
 });
+
+// cloneDeep(obj)
+const obj = {
+  name: 'Dima',
+  friends: ['mark', 'bob'],
+  greeting() {
+    console.log('hello');
+  },
+};
+console.log(obj);
+const copyCloneDeep = cloneDeep(obj);
+console.log(copyCloneDeep);
+copyCloneDeep.friends[0] = 'sam';
+console.log(copyCloneDeep.friends === obj.friends);
+// не копирует методы
+// const cloneStructuredClone = structuredClone(obj);
+// console.log(cloneStructuredClone);
